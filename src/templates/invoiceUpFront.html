@@ -73,6 +73,27 @@
         .light-grey {
             color: rgb(140, 140, 140);
         }
+        
+        .blanc {
+            height: 15px;
+        }
+        
+        table {
+            width: 100%;
+            border-spacing: 0;
+            line-height: 15px;
+            text-align: center;
+        }
+        
+        th {
+            background-color: #0760ff;
+            color: white;
+            font-weight: 800;
+        }
+        
+        td {
+            border-bottom: 1px solid #e4eeff;
+        }
     </style>
 </head>
 
@@ -113,7 +134,6 @@
                     <p>
                         {{headerText}}
                     </p>
-                    <h1>MainContent goes here</h1>
                     <table>
                         <tr>
                             <th>Kurseinheit</th>
@@ -131,7 +151,27 @@
                             <td>{{cross}} €</td>
                         </tr>
                         {{/course.lessons}}
-
+                        <tr>
+                            <td class='blanc' />
+                            <td class='blanc' />
+                            <td class='blanc' />
+                            <td class='blanc' />
+                            <td class='blanc' />
+                        </tr>
+                        <tr>
+                            <td>inkl. {{course.vat}}% MwSt.</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>{{course.vatAmount}} €</td>
+                        </tr>
+                        <tr>
+                            <th>Gesamtbetrag</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>{{course.totalAmountCross}} €</th>
+                        </tr>
                     </table>
                     <p>
                         {{footerText}}
