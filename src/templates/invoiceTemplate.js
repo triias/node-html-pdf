@@ -1,156 +1,3 @@
-var template = `
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pay up front</title>
-    <link rel="stylesheet" type="text/css" href="./style.css" />
-    <style>
-        html,
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-            font-weight: 500;
-            font-size: 8px;
-            color: rgb(103, 103, 103);
-            -webkit-print-color-adjust: exact;
-            box-sizing: border-box;
-        }
-        
-        .page {
-            margin: auto;
-            margin-top: 100px;
-            padding: 40mm 25mm;
-            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
-        }
-        /* 
-@primary-color: #0760ff;
-*/
-        
-        section {
-            padding-bottom: 7mm;
-        }
-        
-        @media print {
-            .page {
-                padding: 0;
-                margin: 0;
-            }
-        }
-        
-        .small {
-            font-size: 7px;
-        }
-        
-        .centered {
-            text-align: center;
-        }
-        
-        .stack {
-            display: flex;
-            display: -webkit-flex;
-        }
-        
-        .text-block {
-            width: 100%;
-        }
-        
-        .text-block-header {
-            height: 4mm;
-        }
-        
-        .right-aligned {
-            text-align: right;
-        }
-        
-        .light-grey {
-            color: rgb(140, 140, 140);
-        }
-    </style>
-</head>
-
-<body>
-    <div class="page">
-        <section>
-            <div class="small">{{organisation.name}} - {{organisation.address.street}} - {{organisation.address.zip}} {{organisation.address.city}}</div>
-            <div class="stack">
-                <div class='text-block'>
-                    <h1 class='text-block-header'></h1>
-                    <div>{{booker.firstName}} {{booker.lastName}}</div>
-                    <div>{{booker.address.street}}</div>
-                    <div>{{booker.address.zip}} {{booker.address.city}}</div>
-                </div>
-                <div class='text-block'></div>
-                <div class='text-block'>
-                    <h1 class='text-block-header'>Rechnungs-Nr.</h1>
-                    <div>Rechnungsdatum</div>
-                    <div>Ihre Kundennummer</div>
-                    <div>Ihr Ansprechpartner</div>
-                </div>
-                <div class='text-block right-aligned'>
-                    <h1 class='text-block-header'>{{invoice.invoiceNumber}}</h1>
-                    <div>{{invoice.dateOfInvoicing}}</div>
-                    <div>{{booker.customerNumber}}</div>
-                    <div>{{contactPerson}}</div>
-                </div>
-            </div>
-        </section>
-        <section>
-            <h1>Rechnung
-                <h1/>
-                <h3 class='light-grey'>{{course.courseTypeName}} {{course.courseNumber}}</h3>
-                <p>
-                    {{headerText}}
-                </p>
-                <div>
-                    <h1>MainContent goes here</h1>
-                </div>
-                <p>
-                    {{footerText}}
-                </p>
-                <p>
-                    {{signatureText}}
-                </p>
-        </section>
-        <div id="pageFooter">
-            <section>
-                <div class="stack light-grey">
-                    <div class='text-block'>
-                        <div>Die kleine Schwimmschule</div>
-                        <div>Bulachstraße 8</div>
-                        <div>85232 Bergkirchen</div>
-                        <div></div>
-                    </div>
-                    <div class='text-block'>
-                        <div>Tel.: 08131 33 55 323</div>
-                        <div>E-Mail.: info@kleine-schwimmschule.de</div>
-                        <div></div>
-                        <div></div>
-                    </div>
-                    <div class='text-block'>
-                        <div>Amtsgericht Dachau</div>
-                        <div>Ust.-ID: DE 322 139 167</div>
-                        <div>Steuer-Nr.: 107/224/31141</div>
-                        <div>Inhaberin: Marta Weber</div>
-                    </div>
-                    <div class='text-block'>
-                        <div>Konto: 262627783763</div>
-                        <div>BLZ: 100110011</div>
-                        <div>IBAN: DE0398388993002ß474830947583</div>
-                        <div>BIC: NTCJDJE1XXX</div>
-                    </div>
-                </div>
-            </section>
-            <div class="centered light-grey">
-                <span>{{page}}</span>/<span>{{pages}}</span>
-            </div>
-
-        </div>
-
-    </div>
-</body>
-`
-
 var templateDataObject = {
     organisation: {
         logo: 'logo',
@@ -168,7 +15,7 @@ var templateDataObject = {
         phone: '08131 33 55 323',
         fax: '',
         email: 'info@kleine-schwimmschule.de',
-        website: 'kleine-schwimmschule.de',
+        website: 'www.kleine-schwimmschule.de',
         bankAccount: {
             accountNumber: 'DE 8908 8990 2376 092',
             BLZ: 'GEN 7278 7266 365',
@@ -177,7 +24,7 @@ var templateDataObject = {
         },
         businessForm: 'Gbr.',
         localCourt: 'Amtsgericht Dachau',
-        taxId: 'DE322139167',
+        taxId: 'DE 322 139 167',
         taxNumber: '107/224/31141',
     },
     contactPerson: 'Matthias Häring',
@@ -210,29 +57,90 @@ var templateDataObject = {
         courseNumber: 'PIK-100049',
         firstLesson: '01.12.2020',
         lessons: [{
+                num: 1,
                 date: '01.12.2020',
-                time: '17:30',
-                net: '30',
+                start: '17:30',
+                end: '19:00',
+                dow: 'Dienstag',
+                cross: '30',
             },
             {
-                date: '07.12.2020',
-                time: '17:30',
-                net: '30',
+                num: 2,
+                date: '08.12.2020',
+                start: '17:30',
+                end: '19:00',
+                dow: 'Dienstag',
+                cross: 30,
             },
             {
-                date: '14.12.2020',
-                time: '17:30',
-                net: '30',
+                num: 3,
+                date: '15.12.2020',
+                start: '17:30',
+                end: '19:00',
+                dow: 'Dienstag',
+                cross: 30,
+            },
+            {
+                num: 4,
+                date: '22.12.2020',
+                start: '17:30',
+                end: '19:00',
+                dow: 'Dienstag',
+                cross: 30,
+            },
+            {
+                num: 5,
+                date: '29.12.2020',
+                start: '17:30',
+                end: '19:00',
+                dow: 'Dienstag',
+                cross: 30,
+            },
+            {
+                num: 6,
+                date: '05.01.2021',
+                start: '17:30',
+                end: '19:00',
+                dow: 'Dienstag',
+                cross: 30,
+            },
+            {
+                num: 7,
+                date: '12.01.2021',
+                start: '17:30',
+                end: '19:00',
+                dow: 'Dienstag',
+                cross: 30,
             },
         ],
-        totalAmountNet: '90',
-        VAT: '16',
+        totalAmountCross: 210,
+        vatAmount: function() {
+            return (this.course.totalAmountCross * this.course.vat) / 100
+        },
+        vat: 16,
     },
+    subject: 'Buchungsbestätigung',
+    //headerText: `Hallo `${function () {return 'hi'}} `{{booker.lastName}},\nherzlichen Dank für Deine Anmeldung bei {{organisation.name}}\nBald ghet es für{{attendee.firstName}} {{attendee.lastName}} los!`,
+    headerText: function() {
+        return (
+            'Hallo ' +
+            this.booker.firstName +
+            ' ' +
+            this.booker.lastName +
+            'herzlichen Dank für Deine Anmeldung bei ' +
+            this.organisation.name +
+            '. ' +
+            'Bald geht es los für ' +
+            this.attendee.firstName +
+            ' ' +
+            this.attendee.lastName +
+            ' !'
+        )
+    },
+    footerText: 'Bitte beachte, dass wir in einigen Bädern in den Schulferien nicht schwimmtn. Bitte beachte auch unsere Allgemeinen Geschäftsbedingungen und unsere Widerrufsbelehrung und die EInwilligungserklärung für Fotoaufnahmen während des Kurses.',
+    signatureText: 'Danke und ein herzliches Servus \n Deine kleine Schwimmschule',
 }
 
-var template = {
-    templateStructure: template,
-    templateData: templateDataObject,
-}
+var templateData = templateDataObject
 
-module.exports = template
+exports = templateData
