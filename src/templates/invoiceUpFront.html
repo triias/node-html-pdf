@@ -19,8 +19,7 @@
             box-sizing: border-box;
         }
         
-        h1 {
-            /* color: red; */
+        h {
             font-weight: 700;
         }
         
@@ -30,9 +29,6 @@
             padding: 40mm 25mm;
             box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
         }
-        /* 
-@primary-color: #0760ff;
-*/
         
         section {
             padding-bottom: 5mm;
@@ -60,6 +56,20 @@
         
         .text-block {
             width: 100%;
+            padding-left: 3px;
+            padding-right: 3px;
+        }
+        
+        .divider {
+            border-left: 1px solid #def3ff;
+        }
+        
+        .text-block :last-of-type {
+            padding-right: 0;
+        }
+        
+        .text-block :first-of-type {
+            padding-left: 0;
         }
         
         .text-block-header {
@@ -69,6 +79,10 @@
         .due-line {
             line-height: 20px;
             margin-right: 10px;
+        }
+        
+        .footer {
+            padding-top: 25px;
         }
         
         .right-aligned {
@@ -91,13 +105,13 @@
         }
         
         th {
-            background-color: #0760ff;
+            background-color: #69c0ff;
             color: white;
             font-weight: 800;
         }
         
         td {
-            border-bottom: 1px solid #e4eeff;
+            border-bottom: 1px solid #def3ff;
         }
         
         tr :last-child {
@@ -196,34 +210,35 @@
                         </p>
                     </section>
                     <div id="pageFooter">
-                        <section>
+                        <div class='footer'>
                             <div class="stack light-grey">
-                                <div class='text-block'>
-                                    <div>{{organisation.name}}</div>
-                                    <div>{{organisation.address.street}}</div>
-                                    <div>{{organisation.address.zip}} {{organisation.address.city}}</div>
-                                    <div></div>
-                                </div>
-                                <div class='text-block'>
+                                <!-- <div class='text-block divider'>
+                                                                    <div>{{organisation.name}}</div>
+                                                                    <div>{{organisation.address.street}}</div>
+                                                                    <div>{{organisation.address.zip}} {{organisation.address.city}}</div>
+                                                                    <div></div>
+                                                                </div> -->
+                                <div class='text-block divider'>
+                                    <div>Kontakt:</div>
                                     <div>Tel.: {{organisation.phone}}</div>
                                     <div>E-Mail.: {{organisation.email}}</div>
                                     <div>Web: {{organisation.website}}</div>
                                     <div></div>
                                 </div>
-                                <div class='text-block'>
+                                <div class='text-block divider'>
                                     <div>{{organisation.localCourt}}</div>
                                     <div>Ust.-ID: {{organisation.taxId}}</div>
                                     <div>Steuer-Nr.: {{organisation.taxNumber}}</div>
                                     <div>Inhaberin: {{organisation.owner.first}} {{organisation.owner.last}}</div>
                                 </div>
-                                <div class='text-block'>
+                                <div class='text-block divider'>
                                     <div>Konto: {{organisation.bankAccount.accountNumber}}</div>
                                     <div>BLZ: {{organisation.bankAccount.BLZ}}</div>
                                     <div>IBAN: {{organisation.bankAccount.IBAN}}</div>
                                     <div>BIC: {{organisation.bankAccount.BIC}}</div>
                                 </div>
                             </div>
-                        </section>
+                        </div>
                         <div class="centered light-grey small">
                             <span>{{page}}</span>/<span>{{pages}}</span>
                         </div>

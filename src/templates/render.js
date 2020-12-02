@@ -115,7 +115,7 @@ function renderHello() {
                     cross: 30,
                 },
             ],
-            totalAmountCross: 90,
+            totalAmountCross: 210,
             vatAmount: function() {
                 return (this.course.totalAmountCross * this.course.vat) / 100
             },
