@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pay up front</title>
+    <title>Instalment payment</title>
     <!-- <link rel="stylesheet" type="text/css" href="./style.css" /> -->
     <style>
         html,
@@ -135,6 +135,7 @@
     <div id="target">Loading...</div>
     <script id="template" type="x-tmpl-mustache">
         <div class="page">
+            <h1>Instalment!!!</h1>
             <section>
                 <div class="small">{{organisation.name}} - {{organisation.address.street}} - {{organisation.address.zip}} {{organisation.address.city}}</div>
                 <div class="stack">
@@ -169,6 +170,7 @@
                         </p>
                         </section/>
                         <section>
+                            <!-- ////// -->
                             <table>
                                 <tr>
                                     <th>Kurseinheit</th>
@@ -177,38 +179,48 @@
                                     <th>Kurszeiten</th>
                                     <th>Preis</th>
                                 </tr>
-                                {{#course.lessons}}
-                                <tr>
-                                    <td>{{num}}. Kurseinheit</td>
-                                    <td>{{dow}}</td>
-                                    <td>{{date}}</td>
-                                    <td>{{start}} - {{end}}</td>
-                                    <td>{{cross}} €</td>
-                                </tr>
-                                {{/course.lessons}}
-                                <tr>
-                                    <td class='blanc' />
-                                    <td class='blanc' />
-                                    <td class='blanc' />
-                                    <td class='blanc' />
-                                    <td class='blanc' />
-                                </tr>
-                                <tr>
-                                    <td>inkl. {{course.vat}}% MwSt.</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>{{course.vatAmount}} €</td>
-                                </tr>
-                                <tr>
-                                    <th>Gesamtbetrag</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th>{{course.totalAmountCross}} €</th>
-                                </tr>
                             </table>
-                            <div class=' due-line light-grey right-aligned small'>Zahlbar bis {{invoice.dueDate}} </div>
+                            {{#course.rates}}
+                            <div class='rate'>
+                                <table>
+                                    {{#lessons}}
+                                    <tr>
+                                        <td>{{num}}. Kurseinheit</td>
+                                        <td>{{dow}}</td>
+                                        <td>{{date}}</td>
+                                        <td>{{start}} - {{end}}</td>
+                                        <td>{{cross}} €</td>
+                                    </tr>
+                                    {{/lessons}}
+
+                                    <tr>
+                                        <td class='blanc' />
+                                        <td class='blanc' />
+                                        <td class='blanc' />
+                                        <td class='blanc' />
+                                        <td class='blanc' />
+                                    </tr>
+                                    <tr>
+                                        <td>inkl. {{course.vat}}% MwSt.</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <!-- <td>{{amount}} * {{course.vat}} /100 €</td> -->
+                                        <td>{{vatAmount}} €</td>
+
+                                    </tr>
+                                    <tr>
+                                        <th>Rate {{month}}</th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th>{{amount}} €</th>
+                                    </tr>
+                                </table>
+                                <div class=' due-line light-grey right-aligned small'>Zahlbar bis {{dueDate}} </div>
+                            </div>
+                            {{/course.rates}}
+                            <!-- ////// -->
                         </section>
                         <p>
                             {{footerText}}
@@ -221,11 +233,11 @@
                         <div class='footer'>
                             <div class="stack light-grey">
                                 <!-- <div class='text-block divider'>
-                                                                                                                                        <div>{{organisation.name}}</div>
-                                                                                                                                        <div>{{organisation.address.street}}</div>
-                                                                                                                                        <div>{{organisation.address.zip}} {{organisation.address.city}}</div>
-                                                                                                                                        <div></div>
-                                                                                                                                    </div> -->
+                                                                                                                                                                                                                                                                                                                                                                                                <div>{{organisation.name}}</div>
+                                                                                                                                                                                                                                                                                                                                                                                                <div>{{organisation.address.street}}</div>
+                                                                                                                                                                                                                                                                                                                                                                                                <div>{{organisation.address.zip}} {{organisation.address.city}}</div>
+                                                                                                                                                                                                                                                                                                                                                                                                <div></div>
+                                                                                                                                                                                                                                                                                                                                                                                            </div> -->
                                 <div class='text-block divider'>
                                     <div>Kontakt:</div>
                                     <div>Tel.: {{organisation.phone}}</div>
@@ -255,7 +267,7 @@
 
         </div>
     </script>
-    <script src="invoiceUpFrontData.js"></script>
+    <script src="invoiceInstalmentData.js"></script>
     <script src="https://unpkg.com/mustache@latest"></script>
     <script src="render.js"></script>
 </body>

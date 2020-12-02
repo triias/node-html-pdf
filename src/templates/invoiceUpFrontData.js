@@ -1,3 +1,6 @@
+function pad(n) {
+    return n < 10 ? n + '0' : n
+}
 var templateDataObject = {
     organisation: {
         logo: 'logo',
@@ -115,7 +118,7 @@ var templateDataObject = {
         ],
         totalAmountCross: 210,
         vatAmount: function() {
-            return (this.course.totalAmountCross * this.course.vat) / 100
+            return pad((this.course.totalAmountCross * this.course.vat) / 100)
         },
         vat: 16,
     },

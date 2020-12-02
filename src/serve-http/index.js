@@ -1,7 +1,8 @@
 const fs = require('fs')
 const http = require('http')
 const pdf = require('../../')
-const tmpl = fs.readFileSync(require.resolve('../templates/invoiceUpFront.html'), 'utf8')
+    //const tmpl = fs.readFileSync(require.resolve('../templates/invoiceUpFront.html'), 'utf8')
+const tmpl = fs.readFileSync(require.resolve('../templates/invoiceInstalment.html'), 'utf8')
 
 const config = {
     base: 'file:///Users/matthiasharing/PROJECTS/kursOrganizerGmbH/TESTEREI/node-html-pdf/src/templates/style.css',
