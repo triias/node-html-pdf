@@ -116,7 +116,9 @@ function renderHello() {
                 },
             ],
             totalAmountCross: 90,
-            vatAmount: 00,
+            vatAmount: function() {
+                return (this.course.totalAmountCross * this.course.vat) / 100
+            },
             vat: 16,
         },
         subject: 'Buchungsbestätigung',
