@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pay up front</title>
-    <link rel="stylesheet" type="text/css" href="./style.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="./style.css" /> -->
     <style>
         html,
         body {
@@ -13,10 +13,15 @@
             padding: 0;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
             font-weight: 500;
-            font-size: 7px;
+            font-size: 8px;
             color: rgb(103, 103, 103);
             -webkit-print-color-adjust: exact;
             box-sizing: border-box;
+        }
+        
+        h1 {
+            /* color: red; */
+            font-weight: 700;
         }
         
         .page {
@@ -41,7 +46,7 @@
         }
         
         .small {
-            font-size: 6px;
+            font-size: 7px;
         }
         
         .centered {
@@ -66,90 +71,115 @@
         }
         
         .light-grey {
-            color: lightgrey;
+            color: rgb(140, 140, 140);
         }
     </style>
 </head>
 
-<body>
-    <div class="page">
-        <section>
-            <div class="small">{{organisation.name}} - {{organisation.address.street}} - {{organisation.address.zip}} {{organisation.address.city}}</div>
-            <div class="stack">
-                <div class='text-block'>
-                    <h1 class='text-block-header'></h1>
-                    <div>{{booker.firstName}} {{booker.lastName}}</div>
-                    <div>{{booker.address.street}}</div>
-                    <div>{{booker.address.zip}} {{booker.address.city}}</div>
-                </div>
-                <div class='text-block'></div>
-                <div class='text-block'>
-                    <h1 class='text-block-header'>Rechnungs-Nr.</h1>
-                    <div>Rechnungsdatum</div>
-                    <div>Ihre Kundennummer</div>
-                    <div>Ihr Ansprechpartner</div>
-                </div>
-                <div class='text-block right-aligned'>
-                    <h1 class='text-block-header'>{{invoice.invoiceNumber}}</h1>
-                    <div>{{invoice.dateOfInvoicing}}</div>
-                    <div>{{booker.customerNumber}}</div>
-                    <div>{{contactPerson}}</div>
-                </div>
-            </div>
-        </section>
-        <section>
-            <h1>Rechnung
-                <h1/>
-                <h3 class='light-grey'>{{course.courseTypeName}} {{course.courseNumber}}</h3>
-                <p>
-                    {{headerText}}
-                </p>
-                <div>
-                    <h1>MainContent goes here</h1>
-                </div>
-                <p>
-                    {{footerText}}
-                </p>
-                <p>
-                    {{signatureText}}
-                </p>
-        </section>
-        <div id="pageFooter">
+<!-- <body> -->
+
+<body onload="{renderHello()}">
+    <div id="target">Loading...</div>
+    <script id="template" type="x-tmpl-mustache">
+        <div class="page">
             <section>
-                <div class="stack light-grey">
+                <div class="small">{{organisation.name}} - {{organisation.address.street}} - {{organisation.address.zip}} {{organisation.address.city}}</div>
+                <div class="stack">
                     <div class='text-block'>
-                        <div>Die kleine Schwimmschule</div>
-                        <div>Bulachstraße 8</div>
-                        <div>85232 Bergkirchen</div>
-                        <div></div>
+                        <h1 class='text-block-header'></h1>
+                        <div>{{booker.firstName}} {{booker.lastName}}</div>
+                        <div>{{booker.address.street}}</div>
+                        <div>{{booker.address.zip}} {{booker.address.city}}</div>
                     </div>
+                    <div class='text-block'></div>
                     <div class='text-block'>
-                        <div>Tel.: 08131 33 55 323</div>
-                        <div>E-Mail.: info@kleine-schwimmschule.de</div>
-                        <div></div>
-                        <div></div>
+                        <h1 class='text-block-header'>Rechnungs-Nr.</h1>
+                        <div>Rechnungsdatum</div>
+                        <div>Ihre Kundennummer</div>
+                        <div>Ihr Ansprechpartner</div>
                     </div>
-                    <div class='text-block'>
-                        <div>Amtsgericht Dachau</div>
-                        <div>Ust.-ID: DE 322 139 167</div>
-                        <div>Steuer-Nr.: 107/224/31141</div>
-                        <div>Inhaberin: Marta Weber</div>
-                    </div>
-                    <div class='text-block'>
-                        <div>Konto: 262627783763</div>
-                        <div>BLZ: 100110011</div>
-                        <div>IBAN: DE0398388993002ß474830947583</div>
-                        <div>BIC: NTCJDJE1XXX</div>
+                    <div class='text-block right-aligned'>
+                        <h1 class='text-block-header'>{{invoice.invoiceNumber}}</h1>
+                        <div>{{invoice.dateOfInvoicing}}</div>
+                        <div>{{booker.customerNumber}}</div>
+                        <div>{{contactPerson}}</div>
                     </div>
                 </div>
             </section>
-            <div class="centered light-grey">
-                <span>{{page}}</span>/<span>{{pages}}</span>
+            <section>
+                <h1>Rechnung
+                    <h1/>
+                    <h3 class='light-grey'>{{course.courseTypeName}} {{course.courseNumber}}</h3>
+                    <p>
+                        {{headerText}}
+                    </p>
+                    <h1>MainContent goes here</h1>
+                    <table>
+                        <tr>
+                            <th>Kurseinheit</th>
+                            <th>Wochentag</th>
+                            <th>Datum</th>
+                            <th>Kurszeiten</th>
+                            <th>Preis</th>
+                        </tr>
+                        {{#course.lessons}}
+                        <tr>
+                            <td>{{num}}. Kurseinheit</td>
+                            <td>{{dow}}</td>
+                            <td>{{date}}</td>
+                            <td>{{start}} - {{end}}</td>
+                            <td>{{cross}} €</td>
+                        </tr>
+                        {{/course.lessons}}
+
+                    </table>
+                    <p>
+                        {{footerText}}
+                    </p>
+                    <p>
+                        {{signatureText}}
+                    </p>
+            </section>
+            <div id="pageFooter">
+                <section>
+                    <div class="stack light-grey">
+                        <div class='text-block'>
+                            <div>{{organisation.name}}</div>
+                            <div>{{organisation.address.street}}</div>
+                            <div>{{organisation.address.zip}} {{organisation.address.city}}</div>
+                            <div></div>
+                        </div>
+                        <div class='text-block'>
+                            <div>Tel.: {{organisation.phone}}</div>
+                            <div>E-Mail.: {{organisation.email}}</div>
+                            <div>Web: {{organisation.website}}</div>
+                            <div></div>
+                        </div>
+                        <div class='text-block'>
+                            <div>{{organisation.localCourt}}</div>
+                            <div>Ust.-ID: {{organisation.taxId}}</div>
+                            <div>Steuer-Nr.: {{organisation.taxNumber}}</div>
+                            <div>Inhaberin: {{organisation.owner.first}} {{organisation.owner.last}}</div>
+                        </div>
+                        <div class='text-block'>
+                            <div>Konto: {{organisation.bankAccount.accountNumber}}</div>
+                            <div>BLZ: {{organisation.bankAccount.BLZ}}</div>
+                            <div>IBAN: {{organisation.bankAccount.IBAN}}</div>
+                            <div>BIC: {{organisation.bankAccount.BIC}}</div>
+                        </div>
+                    </div>
+                </section>
+                <div class="centered light-grey">
+                    <span>{{page}}</span>/<span>{{pages}}</span>
+                </div>
+
             </div>
 
         </div>
-
-    </div>
+    </script>
+    <script src="https://unpkg.com/mustache@latest"></script>
+    <script src="render.js"></script>
 </body>
+<!-- </body> -->
 
 </html>
