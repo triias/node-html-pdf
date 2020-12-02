@@ -136,7 +136,7 @@ var templateDataObject = {
             },
             {
                 dueDate: '01.02.2021',
-                amount: 60,
+                amount: 120,
                 month: 'Januar',
                 lessons: [{
                         num: 8,
@@ -154,13 +154,29 @@ var templateDataObject = {
                         dow: 'Dienstag',
                         cross: 30,
                     },
+                    {
+                        num: 10,
+                        date: '19.01.2021',
+                        start: '17:30',
+                        end: '19:00',
+                        dow: 'Dienstag',
+                        cross: 30,
+                    },
+                    {
+                        num: 11,
+                        date: '26.01.2021',
+                        start: '17:30',
+                        end: '19:00',
+                        dow: 'Dienstag',
+                        cross: 30,
+                    },
                 ],
                 vatAmount: function() {
                     return pad((this.amount * templateDataObject.course.vat) / 100)
                 },
             },
         ],
-        totalAmountCross: 270,
+        totalAmountCross: 330,
         vatAmount: function() {
             return pad((this.course.totalAmountCross * this.course.vat) / 100)
         },

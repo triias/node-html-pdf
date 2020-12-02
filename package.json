@@ -15,7 +15,9 @@
     "scripts": {
         "test": "standard && tape test/index.js examples/*/test.js",
         "example": "nodemon examples//serve-http/index.js",
-        "start": "nodemon src/serve-http/index.js -e ejs,js,css,html,jpg,png,scss"
+        "start": "nodemon src/serve-http/index.js -e ejs,js,css,html,jpg,png,scss upFront",
+        "instalment": "nodemon src/serve-http/index.js instalment",
+        "upFront": "nodemon src/serve-http/index.js upFront"
     },
     "author": "Marc Bachmann",
     "license": "MIT",

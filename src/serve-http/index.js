@@ -2,7 +2,20 @@ const fs = require('fs')
 const http = require('http')
 const pdf = require('../../')
     //const tmpl = fs.readFileSync(require.resolve('../templates/invoiceUpFront.html'), 'utf8')
-const tmpl = fs.readFileSync(require.resolve('../templates/invoiceInstalment.html'), 'utf8')
+    //const tmpl = fs.readFileSync(require.resolve('../templates/invoiceInstalment.html'), 'utf8')
+const upFront = fs.readFileSync(require.resolve('../templates/invoiceUpFront.html'), 'utf8')
+const instalment = fs.readFileSync(require.resolve('../templates/invoiceInstalment.html'), 'utf8')
+
+const tmpl = process.argv[2] === 'upFront' ? upFront : instalment
+
+console.log('==>', process.argv[2])
+
+process.argv.forEach((val, index) => {
+    console.log(`${index}: ${val}`)
+    if (val === 'instalment') {
+        console.log('!!!', val)
+    }
+})
 
 const config = {
     base: 'file:///Users/matthiasharing/PROJECTS/kursOrganizerGmbH/TESTEREI/node-html-pdf/src/templates/style.css',
